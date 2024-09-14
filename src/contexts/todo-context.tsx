@@ -32,7 +32,13 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
         setTodos(JSON.parse(todosString));
       }
     }
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem(user.id, JSON.stringify(todos));
+    }
+  }, [todos]);
 
   const addTodo = (item: AddTodoRequestDto) => {
     setTodos((ps) => {
