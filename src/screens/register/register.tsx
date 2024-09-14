@@ -1,27 +1,39 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Form as AntForm, Input, Button, Card, Flex } from "antd";
-import styles from './register.module.css'
+import styles from "./register.module.css";
+import { useAuthContext } from "../../contexts/auth-context";
+import { RegisterRequestDto } from "../../shared/interfaces";
+import { useNavigate } from "react-router-dom";
+import { PublicPages } from "../routes";
 
 // Define types for form values
-interface RegisterFormValues {
-  email: string;
-  password: string;
-}
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  firstName: Yup.string().required("Fist Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  phone: Yup.string().required("Phone is required"),
+});
 
 const Register = () => {
-  const initialValues: RegisterFormValues = { email: "", password: "" };
+  const initialValues: RegisterRequestDto = {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+  };
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
+  const authContext = useAuthContext();
+  const navigate = useNavigate();
 
-  const onSubmit = (values: RegisterFormValues) => {
-    console.log("Login data:", values);
-    // Implement login logic here
+  const onSubmit = (values: RegisterRequestDto) => {
+    authContext.register(values)
+    navigate(PublicPages.login);
   };
 
   return (
@@ -62,13 +74,61 @@ const Register = () => {
                   className="error"
                 />
               </AntForm.Item>
+
+              <AntForm.Item label="First Name" name="firstName">
+                <Field name="firstName">
+                  {({ field }: any) => (
+                    <Input
+                      {...field}
+                      placeholder="Enter your first name"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  className="error"
+                />
+              </AntForm.Item>
+              
+              <AntForm.Item label="Last Name" name="lastName">
+                <Field name="lastName">
+                  {({ field }: any) => (
+                    <Input
+                      {...field}
+                      placeholder="Enter your last name"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="lastName"
+                  component="div"
+                  className="error"
+                />
+              </AntForm.Item>
+              <AntForm.Item label="Phone" name="phone">
+                <Field name="phone">
+                  {({ field }: any) => (
+                    <Input
+                      {...field}
+                      placeholder="Enter your phone number"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="phone"
+                  component="div"
+                  className="error"
+                />
+              </AntForm.Item>
+
               <AntForm.Item>
                 <Button
                   type="primary"
                   htmlType="submit"
                   style={{ width: "100%" }}
                 >
-                  Login
+                  Register
                 </Button>
               </AntForm.Item>
             </AntForm>
