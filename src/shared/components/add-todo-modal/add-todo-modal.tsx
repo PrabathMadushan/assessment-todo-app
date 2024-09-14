@@ -1,4 +1,4 @@
-import {  Form as AntForm,Button,Descriptions,Flex,Input,Modal } from "antd";
+import {  Form as AntForm,Button,Flex,Input,Modal } from "antd";
 import { ErrorMessage, Field, Formik } from "formik";
 import { AddTodoRequestDto } from "../../interfaces";
 import * as Yup from "yup";
@@ -82,7 +82,7 @@ const AddTodoModal = (props: IProps) => {
                 type="primary"
                 htmlType="submit"
               >
-                Login
+                Add
               </Button>
               </Flex>
             </AntForm.Item>
