@@ -22,6 +22,7 @@ const AddTodoModal = (props: IProps) => {
   const onSubmit = (values: AddTodoRequestDto,resetForm:()=>void) => {
     addTodo(values);
     resetForm();
+    props.onCancel();
   };
 
   return (
