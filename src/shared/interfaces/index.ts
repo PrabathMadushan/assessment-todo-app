@@ -14,3 +14,5 @@ export interface TodoItem {
   title: string;
   description: string;
 }
+
+export type AddTodoRequestDto = Omit<TodoItem, "id">;

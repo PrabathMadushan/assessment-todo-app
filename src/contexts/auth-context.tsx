@@ -21,6 +21,7 @@ export const AuthContext = createContext<AuthContextProps>(
 );
 
 const USERS_KEY = "users";
+const C_USER_KEY = "c_user";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loggedUser, setLoggedUser] = useState<User>();
@@ -29,10 +30,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const usersString = localStorage.getItem(USERS_KEY);
+    const cUserString = localStorage.getItem(C_USER_KEY);
     setUsers([]);
     if (usersString) {
       const users = JSON.parse(usersString);
       setUsers(users);
+    }
+    if(cUserString){
+      const user = JSON.parse(cUserString);
+      setLoggedUser(user);
+      setIsAuth(true)
     }
   }, []);
 
@@ -48,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
     if (user) {
       setLoggedUser(user);
+      localStorage.setItem(C_USER_KEY,JSON.stringify(user))
       setIsAuth(true)
       return true;
     } else {
@@ -62,6 +70,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   const logout = () => {
     setIsAuth(false)
+    localStorage.setItem(C_USER_KEY,"")
     setLoggedUser(undefined)
   };
 

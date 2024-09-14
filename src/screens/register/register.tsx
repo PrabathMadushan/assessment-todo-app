@@ -4,7 +4,7 @@ import { Form as AntForm, Input, Button, Card, Flex } from "antd";
 import styles from "./register.module.css";
 import { useAuthContext } from "../../contexts/auth-context";
 import { RegisterRequestDto } from "../../shared/interfaces";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PublicPages } from "../routes";
 
 // Define types for form values
@@ -59,7 +59,7 @@ const Register = () => {
                 <ErrorMessage name="email" component="div" className="error" />
               </AntForm.Item>
 
-              <AntForm.Item label="Password" name="password">
+              <AntForm.Item label="Password" name="password" style={{ marginBottom: "8px" }}>
                 <Field name="password" type="password">
                   {({ field }: any) => (
                     <Input.Password
@@ -75,7 +75,7 @@ const Register = () => {
                 />
               </AntForm.Item>
 
-              <AntForm.Item label="First Name" name="firstName">
+              <AntForm.Item label="First Name" name="firstName" style={{ marginBottom: "8px" }}>
                 <Field name="firstName">
                   {({ field }: any) => (
                     <Input
@@ -91,7 +91,7 @@ const Register = () => {
                 />
               </AntForm.Item>
               
-              <AntForm.Item label="Last Name" name="lastName">
+              <AntForm.Item label="Last Name" name="lastName" style={{ marginBottom: "8px" }}>
                 <Field name="lastName">
                   {({ field }: any) => (
                     <Input
@@ -122,7 +122,7 @@ const Register = () => {
                 />
               </AntForm.Item>
 
-              <AntForm.Item>
+              <AntForm.Item style={{ marginBottom: "8px" }}>
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -130,6 +130,9 @@ const Register = () => {
                 >
                   Register
                 </Button>
+              </AntForm.Item>
+              <AntForm.Item style={{ marginBottom: "8px" }}>
+                  Already have account? Please <Link to={PublicPages.login}>Login</Link>.
               </AntForm.Item>
             </AntForm>
           )}

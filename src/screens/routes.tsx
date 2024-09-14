@@ -40,7 +40,6 @@ const AppRoutes = () => {
         {authContext.isAuth && (
           <Route path="/" element={<PrivateRoutesLayout />}>
             <Route index element={<Navigate to={PrivatePages.home} />} />
-           
             <Route
               path={PrivatePages.profile.toString().replace("/", "")}
               element={<Profile />}
