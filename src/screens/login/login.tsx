@@ -1,7 +1,11 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Form as AntForm, Input, Button, Card, Flex } from "antd";
-import styles from './login.module.css'
+import styles from "./login.module.css";
+import { useAuthContext } from "../../contexts/auth-context";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { PublicPages } from "../routes";
 
 // Define types for form values
 interface LoginFormValues {
@@ -12,16 +16,20 @@ interface LoginFormValues {
 const Login = () => {
   const initialValues: LoginFormValues = { email: "", password: "" };
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
+  const validationSchema = Yup.object({});
+
+  const authContext = useAuthContext();
+
+  const [error, setError] = useState(false);
 
   const onSubmit = (values: LoginFormValues) => {
     console.log("Login data:", values);
-    // Implement login logic here
+    const logged = authContext.login(values.email, values.password);
+    if (!logged){
+      setError(true)
+    }else{
+      setError(false);
+    }
   };
 
   return (
@@ -44,10 +52,13 @@ const Login = () => {
                     <Input {...field} placeholder="Enter your email" />
                   )}
                 </Field>
-                <ErrorMessage name="email" component="div" className="error" />
               </AntForm.Item>
 
-              <AntForm.Item label="Password" name="password">
+              <AntForm.Item
+                label="Password"
+                name="password"
+                style={{ marginBottom: "8px" }}
+              >
                 <Field name="password" type="password">
                   {({ field }: any) => (
                     <Input.Password
@@ -56,13 +67,12 @@ const Login = () => {
                     />
                   )}
                 </Field>
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="error"
-                />
               </AntForm.Item>
-              <AntForm.Item>
+              <div style={{ marginBottom: "16px" }} className="error">
+                {" "}
+                {error && "Email or Password is incorrect"}
+              </div>
+              <AntForm.Item style={{ marginBottom: "8px" }}>
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -70,6 +80,9 @@ const Login = () => {
                 >
                   Login
                 </Button>
+              </AntForm.Item>
+              <AntForm.Item>
+                  Don't have a account. Please <Link to={PublicPages.register}>Register</Link>.
               </AntForm.Item>
             </AntForm>
           )}

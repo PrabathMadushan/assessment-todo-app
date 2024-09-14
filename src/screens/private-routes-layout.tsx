@@ -1,39 +1,12 @@
 import { Layout, Menu } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import { Outlet } from "react-router-dom";
+import NavBar from "../shared/components/nav-bar/nav-bar";
 
 const PrivateRoutesLayout = () => {
   return (
     <Layout>
-      <Header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={[
-            { key: "home", label: "Home" },
-            { key: "profile", label: "Profile" },
-          ]}
-          onClick={(e) => {
-            console.log(e.key);
-          }}
-          style={{ flex: 1, minWidth: 0 }}
-        />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          selectable={false}
-          items={[{ key: "logout", label: "Logout" }]}
-          style={{ flex: 1, minWidth: 0, justifyContent: "flex-end" }}
-        />
-      </Header>
+      <NavBar/>
       <Content style={{ padding: "0 48px" }}>
         <Outlet />
       </Content>

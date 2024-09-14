@@ -37,7 +37,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    if(users.length>0){
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
   }, [users]);
 
   const login = (email: string, password: string) => {
