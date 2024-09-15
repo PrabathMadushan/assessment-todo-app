@@ -3,7 +3,7 @@ import { TodoItem } from "../../interfaces";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import styles from "./todo-card.module.css";
 import AddTodoModal from "../add-todo-modal/add-todo-modal";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 interface IProps {
   data: TodoItem;
@@ -20,7 +20,7 @@ const TodoCard = (props: IProps) => {
         <strong>{props.data.title}</strong>
       </Col>
       <Col xs={14}>{props.data.description}</Col>
-      <Col>
+      <Col >
         <Flex gap="small">
           <Checkbox
             checked={props.data.complete}

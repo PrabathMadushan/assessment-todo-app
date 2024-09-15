@@ -1,6 +1,6 @@
 import { Button, Col, Row, Space } from "antd";
 import AddTodoModal from "../../shared/components/add-todo-modal/add-todo-modal";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTodoContext } from "../../contexts/todo-context";
 import TodoCard from "../../shared/components/todo-card/todo-card";
 
