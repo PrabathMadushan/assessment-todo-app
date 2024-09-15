@@ -7,7 +7,7 @@ const PrivateRoutesLayout = () => {
   return (
     <Layout>
       <NavBar/>
-      <Content style={{ padding: "0 48px" }}>
+      <Content>
         <Outlet />
       </Content>
       <Footer style={{ textAlign: "center" }}>

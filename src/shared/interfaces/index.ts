@@ -13,6 +13,7 @@ export interface TodoItem {
   id: string;
   title: string;
   description: string;
+  complete:boolean;
 }
 
 export type AddTodoRequestDto = Omit<TodoItem, "id">;

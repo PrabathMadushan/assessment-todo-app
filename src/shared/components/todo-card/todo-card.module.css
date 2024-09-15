@@ -1,0 +1,6 @@
+.todoCard{
+    width: 100%;
+    border: solid 1px #d6d6d6;
+    padding: 5px 10px;
+    border-radius: 8px;
+}

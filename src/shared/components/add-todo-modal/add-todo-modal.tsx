@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const AddTodoModal = (props: IProps) => {
-  const initialValues: AddTodoRequestDto = { title: "", description: "" };
+  const initialValues: Omit<AddTodoRequestDto,"complete"> = { title: "", description: "" };
   const {addTodo} = useTodoContext();
 
   const validationSchema = Yup.object({
@@ -36,7 +36,7 @@ const AddTodoModal = (props: IProps) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values,{resetForm})=>{
-            onSubmit(values,resetForm);
+            onSubmit({...values,complete:false},resetForm);
         }}
       >
         {({ handleSubmit }) => (

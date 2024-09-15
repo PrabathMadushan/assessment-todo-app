@@ -14,6 +14,7 @@ interface TodoContextProps {
   addTodo: (item: AddTodoRequestDto) => void;
   updateTodo: (item: TodoItem) => void;
   deleteToto: (id: string) => void;
+  setComplete: (id: string, value: boolean) => void;
 }
 
 export const TodoContext = createContext<TodoContextProps>(
@@ -65,8 +66,23 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const setComplete = (id: string, value: boolean) => {
+    setTodos((ps) => {
+      const updated = ps.map((td) => {
+        if (td.id === id) {
+          return { ...td, complete: value };
+        }
+        return td;
+      });
+
+      return [...updated];
+    });
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, addTodo, updateTodo, deleteToto }}>
+    <TodoContext.Provider
+      value={{ todos, addTodo, updateTodo, deleteToto, setComplete }}
+    >
       {children}
     </TodoContext.Provider>
   );

@@ -1,13 +1,14 @@
-import { Button, Card, Col, Flex, Row } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import AddTodoModal from "../../shared/components/add-todo-modal/add-todo-modal";
 import { useState } from "react";
 import { useTodoContext } from "../../contexts/todo-context";
+import TodoCard from "../../shared/components/todo-card/todo-card";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
-  const { todos,deleteToto } = useTodoContext();
+  const { todos, deleteToto, setComplete } = useTodoContext();
   return (
-    <div style={{padding:"10px"}}>
+    <Space style={{ padding: "10px", width: "100%" }} direction="vertical">
       <Row justify={"space-between"}>
         <Col>
           <Button onClick={() => setOpenModal(true)}>Add Todo</Button>
@@ -15,27 +16,22 @@ const Home = () => {
       </Row>
       <Row>
         {todos.map((todo, index) => (
-          <Col xs={24} key={index}>
-            <Card title={null} style={{ width: "100%" }}>
-              <Row
-                style={{ width: "100%" }}
-                align={"middle"}
-                justify={"space-between"}
-              >
-                <Col xs={6}>{todo.title}</Col>
-                <Col xs={12}>{todo.description  }</Col>
-                <Col>
-                  <Button type="dashed" onClick={()=>{
-                    deleteToto(todo.id);
-                  }}>Delete</Button>
-                </Col>
-              </Row>
-            </Card>
+          <Col xs={24} key={index} style={{ marginBottom: "10px" }}>
+            <TodoCard
+              data={todo}
+              onDelete={(id) => deleteToto(id)}
+              onUpdate={() => {
+                
+              }}
+              onComplete={(id, value) => {
+                setComplete(id, value);
+              }}
+            />
           </Col>
         ))}
       </Row>
       <AddTodoModal open={openModal} onCancel={() => setOpenModal(false)} />
-    </div>
+    </Space>
   );
 };
 
