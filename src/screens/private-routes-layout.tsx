@@ -1,5 +1,5 @@
-import { Layout, Menu } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Layout } from "antd";
+import { Content, Footer } from "antd/es/layout/layout";
 import { Outlet } from "react-router-dom";
 import NavBar from "../shared/components/nav-bar/nav-bar";
 
